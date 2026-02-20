@@ -8,7 +8,8 @@
 sky_top_color = Color(0.09425146, 0.23495525, 0.5513053, 1)
 sky_horizon_color = Color(0.11939063, 0.16463956, 0.6066454, 1)
 sky_energy_multiplier = 2.0
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_bottom_color = Color(0.09411765, 0.23529412, 0.5529412, 1)
+ground_horizon_color = Color(0.09411765, 0.23529412, 0.5529412, 1)
 energy_multiplier = 0.5
 
 [sub_resource type="Sky" id="Sky_4fuuu"]
@@ -20,6 +21,7 @@ sky = SubResource("Sky_4fuuu")
 tonemap_mode = 2
 glow_enabled = true
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
 volumetric_fog_albedo = Color(0.8474744, 0.84747446, 0.84747446, 1)
 volumetric_fog_emission = Color(0.48731834, 0.60758585, 0.9810993, 1)
 volumetric_fog_emission_energy = 0.01
@@ -43,11 +45,11 @@ shadow_enabled = true
 [node name="Map" parent="." unique_id=1136450681 instance=ExtResource("1_vasa2")]
 
 [node name="Player" parent="Map" unique_id=1957169166 instance=ExtResource("2_h7iqs")]
-transform = Transform3D(-0.81604683, 0, -0.5779858, 0, 1, 0, 0.5779858, 0, -0.81604683, 28.043903, 0.9999999, 4.6680727)
-SPEED = 11.66
+transform = Transform3D(-0.81604683, 0, -0.5779858, 0, 1, 0, 0.5779858, 0, -0.81604683, 44.101517, 0.9999999, -43.23225)
 
 [node name="Moon" type="CSGSphere3D" parent="." unique_id=845439564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 477.35477, 519.29395, -849.7786)
+visible = false
 radius = 100.0
 radial_segments = 30
 rings = 30

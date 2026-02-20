@@ -1,22 +1,42 @@
 extends CharacterBody3D
 
-@export var  SPEED = 5.0
-@export var  JUMP_VELOCITY = 4.5
-@export var  MOUSE_SENSITIVITY = 0.002
+@export_group("Movement")
+@export var BASE_SPEED: float = 5.0
+@export var SPRINT_SPEED: float = 10.0
+@export var JUMP_VELOCITY: float = 4.5
+@export var MOUSE_SENSITIVITY: float = 0.002
 
-@onready var camera = $Camera3D
+@export_group("Headbob")
+@export var headbob_frequency: float = 2.0
+@export var headbob_amplitude: float = 0.07
 
+var SPEED: float = BASE_SPEED
+var headbob_time: float = 0.0
 var camera_x_rotation := 0.0
+
+@onready var camera = $Head/CameraPivot/Camera3D
+@onready var footstep: AudioStreamPlayer3D = $Footstep
+@onready var sprint_timer: Timer = $SprintTimer # Make sure this node exists!
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+var camera_animation_playing := false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# Configure the timer via code just in case
+	sprint_timer.wait_time = 1.0
+	sprint_timer.one_shot = true 
+	# animate the camera
+	animation_player.play("camera_spawn")
+	camera_animation_playing = true
+	await animation_player.animation_finished
+	camera_animation_playing = false
 
 func _unhandled_input(event):
+	if camera_animation_playing:
+		return
 	if event is InputEventMouseMotion:
-		# Rotate body left/right
 		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
-
-		# Rotate camera up/down
 		camera_x_rotation -= event.relative.y * MOUSE_SENSITIVITY
 		camera_x_rotation = clamp(camera_x_rotation, deg_to_rad(-80), deg_to_rad(80))
 		camera.rotation.x = camera_x_rotation
@@ -27,18 +47,48 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Jump
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor() and not camera_animation_playing:
 		velocity.y = JUMP_VELOCITY
 
-	# Movement
+	# Movement Logic
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	if direction:
+	if direction and not camera_animation_playing:
+		# If moving and timer hasn't started yet, start it
+		if sprint_timer.is_stopped() and SPEED == BASE_SPEED:
+			sprint_timer.start()
+			
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
+		# Reset everything when player stops moving
+		sprint_timer.stop()
+		SPEED = BASE_SPEED
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
+	# Headbob logic
+	if is_on_floor() and velocity.length() > 0.1:
+		headbob_time += delta * velocity.length()
+		camera.transform.origin = headbob(headbob_time)
+	else:
+		camera.transform.origin = camera.transform.origin.lerp(Vector3.ZERO, delta * 10)
+		headbob_time = 0.0
+
+func headbob(time):
+	var pos = Vector3.ZERO
+	pos.y = sin(time * headbob_frequency) * headbob_amplitude
+	pos.x = cos(time * headbob_frequency / 2) * headbob_amplitude
+	
+	if sin(time * headbob_frequency) < -0.98:
+		if not footstep.playing:
+			footstep.pitch_scale = randf_range(0.8, 1.2)
+			footstep.play()
+	return pos
+
+# This must be connected to the SprintTimer's timeout signal!
+func _on_sprint_timer_timeout() -> void:
+	SPEED = SPRINT_SPEED

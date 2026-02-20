@@ -1,19 +1,74 @@
 [gd_scene format=3 uid="uid://boohq3w3q0ve4"]
 
 [ext_resource type="Script" uid="uid://ctchjup542y4n" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="AudioStream" uid="uid://ijc5hqgl3t4l" path="res://sounds/footstep.mp3" id="2_rkbax"]
+[ext_resource type="PackedScene" uid="uid://bsudu5ai1r12g" path="res://player/cubehead.gltf" id="3_g1dw6"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_kqu6x"]
+[sub_resource type="Animation" id="Animation_rkbax"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/CameraPivot")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oul6g"]
+[sub_resource type="Animation" id="Animation_g1dw6"]
+resource_name = "camera_spawn"
+length = 4.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/CameraPivot")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 7, -7, 3, 1, 0, 1, -7, 4, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/CameraPivot")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 1, 0, 0, 3, 1, 0, 1, 0, 0, 4, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yw30f"]
+_data = {
+&"RESET": SubResource("Animation_rkbax"),
+&"camera_spawn": SubResource("Animation_g1dw6")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1dw6"]
+radius = 0.3725586
+height = 2.0827637
 
 [node name="Player" type="CharacterBody3D" unique_id=1957169166]
 script = ExtResource("1_oul6g")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=845557205]
-mesh = SubResource("CapsuleMesh_kqu6x")
+[node name="Mesh" parent="." unique_id=1444698799 instance=ExtResource("3_g1dw6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3415625)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1700604487]
-shape = SubResource("CapsuleShape3D_oul6g")
+[node name="Head" type="Node3D" parent="." unique_id=708081614]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7817247, 0)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1017170738]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55529064, -0.28047848)
+[node name="CameraPivot" type="Node3D" parent="Head" unique_id=360196861]
+
+[node name="Camera3D" type="Camera3D" parent="Head/CameraPivot" unique_id=1017170738]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018240213, -0.18930314)
+
+[node name="Footstep" type="AudioStreamPlayer3D" parent="." unique_id=344161664]
+stream = ExtResource("2_rkbax")
+bus = &"walking"
+
+[node name="SprintTimer" type="Timer" parent="." unique_id=525899456]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1515806131]
+libraries/ = SubResource("AnimationLibrary_yw30f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=418854531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0455322, 0.33278507)
+shape = SubResource("CapsuleShape3D_g1dw6")
+
+[connection signal="timeout" from="SprintTimer" to="." method="_on_sprint_timer_timeout"]
+
+[editable path="Mesh"]
