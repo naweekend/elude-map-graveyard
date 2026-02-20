@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 @export_group("Movement")
-@export var BASE_SPEED: float = 5.0
-@export var SPRINT_SPEED: float = 10.0
+@export var BASE_SPEED: float = 7
+@export var SPRINT_SPEED: float = 14.0
 @export var JUMP_VELOCITY: float = 4.5
 @export var MOUSE_SENSITIVITY: float = 0.002
 
@@ -18,6 +18,9 @@ var camera_x_rotation := 0.0
 @onready var footstep: AudioStreamPlayer3D = $Footstep
 @onready var sprint_timer: Timer = $SprintTimer # Make sure this node exists!
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var mesh_animation_player: AnimationPlayer = $Mesh/AnimationPlayer
+@onready var camera_pivot: Node3D = $Head/CameraPivot
+@onready var head: Node3D = $Head
 
 var camera_animation_playing := false
 
@@ -58,13 +61,19 @@ func _physics_process(delta: float) -> void:
 		# If moving and timer hasn't started yet, start it
 		if sprint_timer.is_stopped() and SPEED == BASE_SPEED:
 			sprint_timer.start()
-			
+		
+		# play walking or running animation
+		if SPEED == BASE_SPEED:
+			mesh_animation_player.play("walking")
+		else:
+			mesh_animation_player.play("running")
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
 		# Reset everything when player stops moving
 		sprint_timer.stop()
 		SPEED = BASE_SPEED
+		mesh_animation_player.play("idle")
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
@@ -78,6 +87,15 @@ func _physics_process(delta: float) -> void:
 		camera.transform.origin = camera.transform.origin.lerp(Vector3.ZERO, delta * 10)
 		headbob_time = 0.0
 
+	# camera spin logic
+	var camera_angle_to_spin_to := 0.0
+	if Input.is_action_pressed("spin_camera") and not camera_animation_playing:
+		camera_angle_to_spin_to = -180.0
+	else:
+		camera_angle_to_spin_to = 0.0
+	
+	head.rotation.y = lerp_angle(head.rotation.y, deg_to_rad(camera_angle_to_spin_to), 5 * delta)
+	
 func headbob(time):
 	var pos = Vector3.ZERO
 	pos.y = sin(time * headbob_frequency) * headbob_amplitude
@@ -92,3 +110,4 @@ func headbob(time):
 # This must be connected to the SprintTimer's timeout signal!
 func _on_sprint_timer_timeout() -> void:
 	SPEED = SPRINT_SPEED
+	mesh_animation_player.queue("running")

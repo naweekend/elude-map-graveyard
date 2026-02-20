@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://by321psv1b0nj"]
 
+[ext_resource type="Script" uid="uid://3vmx8otd8isu" path="res://game/game.gd" id="1_4fuuu"]
 [ext_resource type="PackedScene" uid="uid://36vl5nsjpre6" path="res://map/map.tscn" id="1_vasa2"]
 [ext_resource type="PackedScene" uid="uid://boohq3w3q0ve4" path="res://player/player.tscn" id="2_h7iqs"]
 [ext_resource type="Texture2D" uid="uid://ibeokng0mcf1" path="res://map/textures/Moon_texture.jpg" id="3_h7iqs"]
@@ -21,10 +22,9 @@ sky = SubResource("Sky_4fuuu")
 tonemap_mode = 2
 glow_enabled = true
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_albedo = Color(0.8474744, 0.84747446, 0.84747446, 1)
-volumetric_fog_emission = Color(0.48731834, 0.60758585, 0.9810993, 1)
-volumetric_fog_emission_energy = 0.01
+volumetric_fog_density = 0.005
+volumetric_fog_albedo = Color(0.17977303, 0.43528175, 0.7081512, 1)
+volumetric_fog_emission = Color(0.09143519, 0.4676298, 0.6335676, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vasa2"]
 albedo_texture = ExtResource("3_h7iqs")
@@ -33,6 +33,7 @@ emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 1.16
 
 [node name="Game" type="Node3D" unique_id=1636110399]
+script = ExtResource("1_4fuuu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=230637578]
 environment = SubResource("Environment_dxrkv")

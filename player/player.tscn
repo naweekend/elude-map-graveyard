@@ -16,21 +16,21 @@ tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
 resource_name = "camera_spawn"
-length = 4.0
+length = 4.5
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Head/CameraPivot")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 7, -7, 3, 1, 0, 1, -7, 4, 1, 0, 0, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 7, -4, 3, 1, 0, 1, -4, 3.36, 1, 0, 1, -4, 4.5, 1, 0, 0, -1)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Head/CameraPivot")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 1, 0, 0, 3, 1, 0, 1, 0, 0, 4, 1, 0, 0, 0, 1)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 1, 0, 0, 3, 1, 0, 1, 0, 0, 3.36, 1, 0, 1, 0, 0, 4.5, 1, 0, 0, 0, 1)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yw30f"]
 _data = {
@@ -45,16 +45,17 @@ height = 2.0827637
 [node name="Player" type="CharacterBody3D" unique_id=1957169166]
 script = ExtResource("1_oul6g")
 
-[node name="Mesh" parent="." unique_id=1444698799 instance=ExtResource("3_g1dw6")]
+[node name="Mesh" parent="." unique_id=567775294 instance=ExtResource("3_g1dw6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3415625)
 
 [node name="Head" type="Node3D" parent="." unique_id=708081614]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7817247, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8135343, 0.33664906)
 
 [node name="CameraPivot" type="Node3D" parent="Head" unique_id=360196861]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head/CameraPivot" unique_id=1017170738]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018240213, -0.18930314)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.006712079)
 
 [node name="Footstep" type="AudioStreamPlayer3D" parent="." unique_id=344161664]
 stream = ExtResource("2_rkbax")
