@@ -15,6 +15,9 @@ var game_modes = ["easy", "normal", "hard"]
 @onready var mob_spawner_2: Node3D = $MobSpawner2
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var color_rect: ColorRect = $CanvasLayer/ColorRect
+@onready var time_progress_bar: ProgressBar = $CanvasLayer/TimeProgressBar
+@onready var round_timer: Timer = $RoundTimer
+@onready var time_label: Label = $CanvasLayer/TimeLabel
 
 func _ready() -> void:		
 	# get a random value
@@ -47,7 +50,18 @@ func _ready() -> void:
 		mob_spawner.spawn_interval = 30
 		mob_spawner_2.mob_count = 3
 		mob_spawner_2.spawn_interval = 30
-	
+		
+func _process(delta: float) -> void:
+	# round timer and time progress bar
+	time_progress_bar.value = round_timer.time_left
+	# Update the label with the formatted string
+	time_label.text = format_time(round_timer.time_left)
 
 func _on_round_timer_timeout() -> void:
 	print("You survived!")
+
+func format_time(time_in_seconds: float) -> String:
+	var minutes: int = int(time_in_seconds) / 60
+	var seconds: int = int(time_in_seconds) % 60
+	
+	return "%02d:%02d" % [minutes, seconds]

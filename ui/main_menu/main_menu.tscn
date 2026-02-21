@@ -4,15 +4,23 @@
 [ext_resource type="PackedScene" uid="uid://36vl5nsjpre6" path="res://map/map.tscn" id="1_uhj5c"]
 [ext_resource type="PackedScene" uid="uid://bsudu5ai1r12g" path="res://player/cubehead.gltf" id="2_mu8pm"]
 [ext_resource type="Shader" uid="uid://luo48g4oyce3" path="res://game/portal.gdshader" id="4_i5wg5"]
-[ext_resource type="Texture2D" uid="uid://dbqrmrhculos5" path="res://ui/main_menu/buttons/play.png" id="4_joh67"]
-[ext_resource type="Texture2D" uid="uid://dqvu7oc0enq2r" path="res://ui/main_menu/buttons/settings.png" id="4_u184e"]
+[ext_resource type="Texture2D" uid="uid://bwyi2636g35wf" path="res://ui/main_menu/affinity/play.png" id="4_tf5ef"]
 [ext_resource type="AudioStream" uid="uid://dub063ghid534" path="res://game/portal_sound.mp3" id="5_3c04x"]
-[ext_resource type="Texture2D" uid="uid://cjtjwaf4ncla5" path="res://ui/main_menu/buttons/exit.png" id="5_6mijq"]
-[ext_resource type="Texture2D" uid="uid://ld2i8frlnl7x" path="res://ui/main_menu/buttons/play-hover.png" id="5_u184e"]
-[ext_resource type="Texture2D" uid="uid://cgrcceckavy3f" path="res://ui/main_menu/buttons/settings-hover.png" id="7_w2r0d"]
-[ext_resource type="Texture2D" uid="uid://d3o68jr8ysqqi" path="res://ui/main_menu/buttons/exit-hover.png" id="9_s4pem"]
+[ext_resource type="Texture2D" uid="uid://btevyuor3jdce" path="res://ui/main_menu/affinity/play-hover.png" id="5_qao3l"]
 [ext_resource type="Texture2D" uid="uid://yuysxdqt82bj" path="res://ui/main_menu/elude-red.png" id="10_xio0d"]
 [ext_resource type="Shader" uid="uid://dj47s4kf1a6wh" path="res://game/sky.gdshader" id="13_tf5ef"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w2r0d"]
+load_path = "res://.godot/imported/settings.png-1a83b0033fde6fd9466e7c385659d42a.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4e78x"]
+load_path = "res://.godot/imported/settings-hover.png-37f4eb3d1ba41bc58d395ae1b60cb26d.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s4pem"]
+load_path = "res://.godot/imported/exit.png-fd782a274e71ba5f28155b081039c421.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xio0d"]
+load_path = "res://.godot/imported/exit-hover.png-fc8915d850151d246e6ca5b7930c8180.ctex"
 
 [sub_resource type="ImageTexture" id="ImageTexture_i5wg5"]
 
@@ -146,14 +154,16 @@ anchors_preset = -1
 anchor_left = 0.84800005
 anchor_top = 0.31500003
 anchor_right = 0.989
-anchor_bottom = 0.44000003
-offset_left = 0.10394287
-offset_top = -0.120010376
-offset_right = -0.32800293
-offset_bottom = -0.120025635
+anchor_bottom = 0.39200002
+offset_left = -776.16016
+offset_top = 138.79996
+offset_right = -792.88
+offset_bottom = 157.63998
+grow_horizontal = 2
+grow_vertical = 2
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("4_joh67")
-texture_hover = ExtResource("5_u184e")
+texture_normal = ExtResource("4_tf5ef")
+texture_hover = ExtResource("5_qao3l")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -163,13 +173,13 @@ anchor_left = 0.73600006
 anchor_top = 0.43400002
 anchor_right = 1.0
 anchor_bottom = 0.56200004
-offset_left = 0.12792969
-offset_top = 4.7680054
-offset_right = -1.0968018
-offset_bottom = 4.8239746
+offset_left = -602.1201
+offset_top = 146.27997
+offset_right = -783.24805
+offset_bottom = 88.55194
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("4_u184e")
-texture_hover = ExtResource("7_w2r0d")
+texture_normal = SubResource("CompressedTexture2D_w2r0d")
+texture_hover = SubResource("CompressedTexture2D_4e78x")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -179,26 +189,26 @@ anchor_left = 0.85600007
 anchor_top = 0.56
 anchor_right = 0.994
 anchor_bottom = 0.68200004
-offset_left = -0.11206055
-offset_top = 0.11999512
-offset_right = -0.088012695
-offset_bottom = 0.063964844
+offset_left = -737.52014
+offset_top = 115.20001
+offset_right = -860.88806
+offset_bottom = 44.51996
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("5_6mijq")
-texture_hover = ExtResource("9_s4pem")
+texture_normal = SubResource("CompressedTexture2D_s4pem")
+texture_hover = SubResource("CompressedTexture2D_xio0d")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1752042016]
+[node name="Logo" type="TextureRect" parent="CanvasLayer" unique_id=1752042016]
 anchors_preset = -1
 anchor_left = 0.333
 anchor_top = 0.028
 anchor_right = 0.697
 anchor_bottom = 0.264
-offset_left = 7.384033
-offset_top = -0.144001
-offset_right = 7.055908
-offset_bottom = -0.072021484
+offset_left = 27.384033
+offset_top = 93.856
+offset_right = -33.23999
+offset_bottom = 93.92798
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = ExtResource("10_xio0d")
@@ -213,6 +223,29 @@ grow_vertical = 2
 size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="BlackBar1" type="ColorRect" parent="CanvasLayer" unique_id=1865708179]
+anchors_preset = -1
+anchor_left = -0.006
+anchor_right = 1.016
+anchor_bottom = 0.081
+offset_left = 0.52000046
+offset_right = -0.7200928
+offset_bottom = -0.48000336
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BlackBar2" type="ColorRect" parent="CanvasLayer" unique_id=1213783825]
+anchors_preset = -1
+anchor_top = 0.919
+anchor_right = 1.0090001
+anchor_bottom = 1.0040001
+offset_left = -8.0
+offset_top = -0.52001953
+offset_right = 0.71984863
+offset_bottom = -0.32006836
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Portal" type="MeshInstance3D" parent="." unique_id=1086262287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5776181, 0.044823706, 11.670873)
