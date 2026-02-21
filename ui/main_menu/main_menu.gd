@@ -8,7 +8,7 @@ extends Node3D
 @onready var player_animation_player: AnimationPlayer = $PlayerMesh/AnimationPlayer
 @onready var player_mesh: Node3D = $PlayerMesh
 @onready var player_fall_timer: Timer = $PlayerFallTimer
-@onready var play_button: Button = $CanvasLayer/VBoxContainer/PlayButton
+@onready var play_button: TextureButton = $CanvasLayer/PlayButton
 @onready var portal_animation_player: AnimationPlayer = $PortalAnimationPlayer
 
 
@@ -63,3 +63,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "color_rect_fade_in":
 		get_tree().change_scene_to_file("res://game/game.tscn")
 	
+
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()

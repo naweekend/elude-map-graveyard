@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="godot graveyard map"
-run/main_scene="uid://by321psv1b0nj"
+run/main_scene="uid://d4f2hof65e1bs"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 run/size/viewport_height=648
@@ -23,7 +23,11 @@ buses/default_bus_layout="uid://xhcx0huw3xkd"
 
 [display]
 
-window/size/mode=3
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/main_scene="uid://d4f2hof65e1bs"
 
 [input]
 
@@ -67,6 +71,7 @@ common/physics_interpolation=true
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 anti_aliasing/quality/msaa_3d=3
 anti_aliasing/quality/screen_space_aa=2

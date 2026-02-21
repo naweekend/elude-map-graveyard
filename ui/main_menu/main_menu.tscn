@@ -4,7 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://36vl5nsjpre6" path="res://map/map.tscn" id="1_uhj5c"]
 [ext_resource type="PackedScene" uid="uid://bsudu5ai1r12g" path="res://player/cubehead.gltf" id="2_mu8pm"]
 [ext_resource type="Shader" uid="uid://luo48g4oyce3" path="res://game/portal.gdshader" id="4_i5wg5"]
+[ext_resource type="Texture2D" uid="uid://dbqrmrhculos5" path="res://ui/main_menu/buttons/play.png" id="4_joh67"]
+[ext_resource type="Texture2D" uid="uid://dqvu7oc0enq2r" path="res://ui/main_menu/buttons/settings.png" id="4_u184e"]
 [ext_resource type="AudioStream" uid="uid://dub063ghid534" path="res://game/portal_sound.mp3" id="5_3c04x"]
+[ext_resource type="Texture2D" uid="uid://cjtjwaf4ncla5" path="res://ui/main_menu/buttons/exit.png" id="5_6mijq"]
+[ext_resource type="Texture2D" uid="uid://ld2i8frlnl7x" path="res://ui/main_menu/buttons/play-hover.png" id="5_u184e"]
+[ext_resource type="Texture2D" uid="uid://cgrcceckavy3f" path="res://ui/main_menu/buttons/settings-hover.png" id="7_w2r0d"]
+[ext_resource type="Texture2D" uid="uid://d3o68jr8ysqqi" path="res://ui/main_menu/buttons/exit-hover.png" id="9_s4pem"]
+[ext_resource type="Texture2D" uid="uid://yuysxdqt82bj" path="res://ui/main_menu/elude-red.png" id="10_xio0d"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_i5wg5"]
 
@@ -110,15 +117,68 @@ transform = Transform3D(1, 0, 0, 0, -0.976296, 0.21643972, 0, -0.21643972, -0.97
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2024989252]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=283546016]
-offset_left = 995.0
-offset_top = 201.0
-offset_right = 1152.0
-offset_bottom = 503.0
+[node name="PlayButton" type="TextureButton" parent="CanvasLayer" unique_id=421139194]
+anchors_preset = -1
+anchor_left = 0.84800005
+anchor_top = 0.31500003
+anchor_right = 0.989
+anchor_bottom = 0.44000003
+offset_left = 0.10394287
+offset_top = -0.120010376
+offset_right = -0.32800293
+offset_bottom = -0.120025635
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_joh67")
+texture_hover = ExtResource("5_u184e")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=2079542420]
-layout_mode = 2
-text = "PLAY"
+[node name="SettingsButton" type="TextureButton" parent="CanvasLayer" unique_id=105011731]
+anchors_preset = -1
+anchor_left = 0.73600006
+anchor_top = 0.43400002
+anchor_right = 1.0
+anchor_bottom = 0.56200004
+offset_left = 0.12792969
+offset_top = 4.7680054
+offset_right = -1.0968018
+offset_bottom = 4.8239746
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_u184e")
+texture_hover = ExtResource("7_w2r0d")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="ExitButton" type="TextureButton" parent="CanvasLayer" unique_id=1466663481]
+anchors_preset = -1
+anchor_left = 0.85600007
+anchor_top = 0.56
+anchor_right = 0.994
+anchor_bottom = 0.68200004
+offset_left = -0.11206055
+offset_top = 0.11999512
+offset_right = -0.088012695
+offset_bottom = 0.063964844
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_6mijq")
+texture_hover = ExtResource("9_s4pem")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1752042016]
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 0.028
+anchor_right = 0.697
+anchor_bottom = 0.264
+offset_left = 7.384033
+offset_top = -0.144001
+offset_right = 7.055908
+offset_bottom = -0.072021484
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("10_xio0d")
+stretch_mode = 4
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=401261943]
 anchors_preset = 15
@@ -147,7 +207,8 @@ wait_time = 1.5
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=355039057]
 environment = SubResource("Environment_joh67")
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="PlayerFallTimer" to="." method="_on_player_fall_timer_timeout"]
 

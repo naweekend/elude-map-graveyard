@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @export_group("Movement")
-@export var BASE_SPEED: float = 10
+@export var BASE_SPEED: float = 8
 @export var SPRINT_SPEED: float = 14
 @export var JUMP_VELOCITY: float = 4.5
 @export var MOUSE_SENSITIVITY: float = 0.002
