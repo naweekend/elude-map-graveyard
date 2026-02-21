@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://3vmx8otd8isu" path="res://game/game.gd" id="1_4fuuu"]
 [ext_resource type="PackedScene" uid="uid://36vl5nsjpre6" path="res://map/map.tscn" id="1_vasa2"]
 [ext_resource type="PackedScene" uid="uid://boohq3w3q0ve4" path="res://player/player.tscn" id="2_h7iqs"]
-[ext_resource type="Texture2D" uid="uid://ibeokng0mcf1" path="res://map/textures/Moon_texture.jpg" id="3_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://c0d0xxm3ocubu" path="res://mob/spawner/mob_spawner.tscn" id="5_dxrkv"]
 [ext_resource type="Texture2D" uid="uid://bibofd14ygrjt" path="res://ui/hud/over-hpbar.png" id="6_l8g03"]
 [ext_resource type="Texture2D" uid="uid://c2h8uliembmg8" path="res://ui/hud/progress-hpbar.png" id="7_j8tme"]
+[ext_resource type="FontFile" uid="uid://dxoaxc7oq1wh5" path="res://ui/fonts/Zerove-Regular.ttf" id="7_y36n6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h7iqs"]
 sky_top_color = Color(0.09425146, 0.23495525, 0.5513053, 1)
@@ -29,8 +29,11 @@ volumetric_fog_density = 0.005
 volumetric_fog_albedo = Color(0.17977303, 0.43528175, 0.7081512, 1)
 volumetric_fog_emission = Color(0.09143519, 0.4676298, 0.6335676, 1)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u5opy"]
+load_path = "res://.godot/imported/Moon_texture.jpg-39363b4c884ecb416531dd1fc7244398.s3tc.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vasa2"]
-albedo_texture = ExtResource("3_h7iqs")
+albedo_texture = SubResource("CompressedTexture2D_u5opy")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 1.16
@@ -93,10 +96,10 @@ rings = 30
 material = SubResource("StandardMaterial3D_vasa2")
 
 [node name="MobSpawner" parent="." unique_id=47042793 instance=ExtResource("5_dxrkv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.16591, 0, 51.832695)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.28099, 28.518679, 18.186367)
 
 [node name="MobSpawner2" parent="." unique_id=40451629 instance=ExtResource("5_dxrkv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.36883, 0, 48.574356)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -178.43405, 16.885069, 48.574356)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1136086001]
 
@@ -125,8 +128,29 @@ nine_patch_stretch = true
 texture_over = ExtResource("6_l8g03")
 texture_progress = ExtResource("7_j8tme")
 
+[node name="TimeLabel" type="Label" parent="CanvasLayer" unique_id=2089991438]
+anchors_preset = -1
+anchor_left = 0.47300002
+anchor_top = 0.10300001
+anchor_right = 0.527
+anchor_bottom = 0.16700001
+offset_left = -0.3959961
+offset_top = 0.2559967
+offset_right = 0.3959961
+offset_bottom = -0.21600342
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("7_y36n6")
+theme_override_font_sizes/font_size = 35
+text = "2:39"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=336096464]
 libraries/ = SubResource("AnimationLibrary_dakft")
 
 [node name="Player" parent="." unique_id=1957169166 instance=ExtResource("2_h7iqs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.716938, 0, -4.4504566)
+
+[node name="RoundTimer" type="Timer" parent="." unique_id=1067876294]
+wait_time = 120.0
+autostart = true
+
+[connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

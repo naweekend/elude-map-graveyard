@@ -48,3 +48,6 @@ func _ready() -> void:
 		mob_spawner_2.mob_count = 3
 		mob_spawner_2.spawn_interval = 30
 	
+
+func _on_round_timer_timeout() -> void:
+	print("You survived!")

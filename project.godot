@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="godot graveyard map"
-run/main_scene="uid://by321psv1b0nj"
+run/main_scene="uid://d4f2hof65e1bs"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 run/size/viewport_height=648
@@ -27,6 +27,9 @@ SaveLoad="*uid://dsohnkwkwgggn"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=4
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/main_scene="uid://d4f2hof65e1bs"

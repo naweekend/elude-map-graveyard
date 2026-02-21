@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var SPEED: float = randf_range(13, 14)
+@export var SPEED: float = randf_range(18, 20)
 @export var JUMP_VELOCITY: float = 10.0
 @export var JUMP_DISTANCE: float = 5.0
 
