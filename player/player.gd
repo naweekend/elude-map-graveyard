@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 @export_group("Movement")
-@export var BASE_SPEED: float = 7
-@export var SPRINT_SPEED: float = 14.0
+@export var BASE_SPEED: float = 10
+@export var SPRINT_SPEED: float = 24.0
 @export var JUMP_VELOCITY: float = 4.5
 @export var MOUSE_SENSITIVITY: float = 0.002
 
@@ -23,6 +23,7 @@ var camera_x_rotation := 0.0
 @onready var head: Node3D = $Head
 
 var camera_animation_playing := false
+var health := 100
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -52,6 +53,9 @@ func _physics_process(delta: float) -> void:
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor() and not camera_animation_playing:
 		velocity.y = JUMP_VELOCITY
+		if not footstep.playing:
+			footstep.pitch_scale = randf_range(0.8, 1.2)
+			footstep.play()
 
 	# Movement Logic
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
@@ -96,6 +100,10 @@ func _physics_process(delta: float) -> void:
 	
 	head.rotation.y = lerp_angle(head.rotation.y, deg_to_rad(camera_angle_to_spin_to), 5 * delta)
 	
+	# death logic
+	if health <= 0:
+		queue_free()
+	
 func headbob(time):
 	var pos = Vector3.ZERO
 	pos.y = sin(time * headbob_frequency) * headbob_amplitude
@@ -111,3 +119,7 @@ func headbob(time):
 func _on_sprint_timer_timeout() -> void:
 	SPEED = SPRINT_SPEED
 	mesh_animation_player.queue("running")
+
+func take_damage(damage):
+	health -= damage
+	print(health)

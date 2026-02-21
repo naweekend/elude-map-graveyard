@@ -10,6 +10,9 @@ var fog_colors = [
 	{"albedo": "#FF00FF", "emission": "#330033"}, # Hot Magenta / Nightshade
 	{"albedo": "#F0E68C", "emission": "#4D4D00"}  # Sulfur Yellow / Dark Olive
 ]
+var game_modes = ["easy", "normal", "hard"]
+@onready var mob_spawner: Node3D = $MobSpawner
+@onready var mob_spawner_2: Node3D = $MobSpawner2
 
 func _ready() -> void:	
 	# get a random value
@@ -21,3 +24,20 @@ func _ready() -> void:
 	env.volumetric_fog_density = density
 	env.volumetric_fog_albedo = albedo
 	env.volumetric_fog_emission = emission
+	
+	var game_mode = game_modes.pick_random()
+	print(game_mode)
+	if game_mode == "easy":
+		mob_spawner.mob_count = 1
+		mob_spawner_2.mob_count = 1
+	elif game_mode == "normal":
+		mob_spawner.mob_count = 2
+		mob_spawner.spawn_interval = 30
+		mob_spawner_2.mob_count = 1	
+		mob_spawner_2.spawn_interval = 60
+	elif game_mode == "hard":
+		mob_spawner.mob_count = 2
+		mob_spawner.spawn_interval = 30
+		mob_spawner_2.mob_count = 3
+		mob_spawner_2.spawn_interval = 30
+	

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://36vl5nsjpre6" path="res://map/map.tscn" id="1_vasa2"]
 [ext_resource type="PackedScene" uid="uid://boohq3w3q0ve4" path="res://player/player.tscn" id="2_h7iqs"]
 [ext_resource type="Texture2D" uid="uid://ibeokng0mcf1" path="res://map/textures/Moon_texture.jpg" id="3_h7iqs"]
+[ext_resource type="PackedScene" uid="uid://c0d0xxm3ocubu" path="res://mob/spawner/mob_spawner.tscn" id="5_dxrkv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h7iqs"]
 sky_top_color = Color(0.09425146, 0.23495525, 0.5513053, 1)
@@ -45,9 +46,6 @@ shadow_enabled = true
 
 [node name="Map" parent="." unique_id=1136450681 instance=ExtResource("1_vasa2")]
 
-[node name="Player" parent="Map" unique_id=1957169166 instance=ExtResource("2_h7iqs")]
-transform = Transform3D(-0.81604683, 0, -0.5779858, 0, 1, 0, 0.5779858, 0, -0.81604683, 44.101517, 0.9999999, -43.23225)
-
 [node name="Moon" type="CSGSphere3D" parent="." unique_id=845439564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 477.35477, 519.29395, -849.7786)
 visible = false
@@ -55,3 +53,12 @@ radius = 100.0
 radial_segments = 30
 rings = 30
 material = SubResource("StandardMaterial3D_vasa2")
+
+[node name="Player" parent="." unique_id=1957169166 instance=ExtResource("2_h7iqs")]
+transform = Transform3D(-0.81604683, 0, -0.5779858, 0, 1, 0, 0.5779858, 0, -0.81604683, 44.101517, 0.9999999, -43.23225)
+
+[node name="MobSpawner" parent="." unique_id=47042793 instance=ExtResource("5_dxrkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.16591, 0, 51.832695)
+
+[node name="MobSpawner2" parent="." unique_id=40451629 instance=ExtResource("5_dxrkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.36883, 0, 48.574356)

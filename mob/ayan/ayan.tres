@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MobData" format=3 uid="uid://brobkrnjqm5sp"]
+
+[ext_resource type="Texture2D" uid="uid://d3xx7d1fr5rq5" path="res://mob/ayan/ayan_pic.png" id="1_nuwuk"]
+[ext_resource type="AudioStream" uid="uid://doxvacpiy6dmj" path="res://mob/ayan/ayan_audio.mp3" id="2_ctcw7"]
+[ext_resource type="Script" uid="uid://3sn3yg7ol8cj" path="res://mob/MobData.gd" id="3_imqkd"]
+
+[resource]
+script = ExtResource("3_imqkd")
+mob_name = "Ayan"
+mob_pic = ExtResource("1_nuwuk")
+mob_sound = ExtResource("2_ctcw7")
+sound_time = 1.0
+metadata/_custom_type_script = "uid://3sn3yg7ol8cj"

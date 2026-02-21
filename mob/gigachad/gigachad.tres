@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MobData" format=3 uid="uid://c3jo2jfss5ym4"]
+
+[ext_resource type="Script" uid="uid://3sn3yg7ol8cj" path="res://mob/MobData.gd" id="1_k24ue"]
+[ext_resource type="Texture2D" uid="uid://duhgwhn4f7ebw" path="res://mob/gigachad/gigachad.png" id="1_ofd6d"]
+[ext_resource type="AudioStream" uid="uid://b5igym0jccvgb" path="res://mob/gigachad/rizz-sound-effect.mp3" id="2_mktka"]
+
+[resource]
+script = ExtResource("1_k24ue")
+mob_name = "GiGaChad"
+mob_pic = ExtResource("1_ofd6d")
+mob_sound = ExtResource("2_mktka")
+sound_time = 3.0
+metadata/_custom_type_script = "uid://3sn3yg7ol8cj"

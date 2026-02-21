@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c0d0xxm3ocubu"]
+
+[ext_resource type="Script" uid="uid://cxykf2vurnrqe" path="res://mob/spawner/mob_spawner.gd" id="1_bbrbm"]
+[ext_resource type="PackedScene" uid="uid://caq0gs6nk6qr4" path="res://mob/mob.tscn" id="2_68dvk"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_68dvk"]
+
+[node name="MobSpawner" type="Node3D" unique_id=47042793]
+script = ExtResource("1_bbrbm")
+mob_tscn = ExtResource("2_68dvk")
+
+[node name="Timer" type="Timer" parent="." unique_id=2081920990]
+autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1466333757]
+transform = Transform3D(1.345, 0, 0, 0, 0.117, 0, 0, 0, 1.34, 0, 0, 0)
+mesh = SubResource("CylinderMesh_68dvk")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=532520673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0511966, 0)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
