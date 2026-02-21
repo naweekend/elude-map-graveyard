@@ -3,9 +3,10 @@ extends Node3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 const milk_tscn = preload("uid://dfjyjra0rg56w")
 var milks_count = 0
+@export var total_milks: int = 5
 
 func _physics_process(delta: float) -> void:
-	while milks_count < 5:
+	while milks_count < total_milks:
 		var random_pos: Dictionary = {
 			"x": 0,
 			"y": 0,
