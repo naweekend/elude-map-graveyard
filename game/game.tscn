@@ -14,12 +14,12 @@ ground_bottom_color = Color(0.09411765, 0.23529412, 0.5529412, 1)
 ground_horizon_color = Color(0.09411765, 0.23529412, 0.5529412, 1)
 energy_multiplier = 0.5
 
-[sub_resource type="Sky" id="Sky_4fuuu"]
+[sub_resource type="Sky" id="Sky_dxrkv"]
 sky_material = SubResource("ProceduralSkyMaterial_h7iqs")
 
 [sub_resource type="Environment" id="Environment_dxrkv"]
 background_mode = 2
-sky = SubResource("Sky_4fuuu")
+sky = SubResource("Sky_dxrkv")
 tonemap_mode = 2
 glow_enabled = true
 volumetric_fog_enabled = true
@@ -32,6 +32,42 @@ albedo_texture = ExtResource("3_h7iqs")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 1.16
+
+[sub_resource type="Animation" id="Animation_dakft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dxrkv"]
+resource_name = "color_rect_fadeout"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dakft"]
+_data = {
+&"RESET": SubResource("Animation_dakft"),
+&"color_rect_fadeout": SubResource("Animation_dxrkv")
+}
 
 [node name="Game" type="Node3D" unique_id=1636110399]
 script = ExtResource("1_4fuuu")
@@ -54,11 +90,24 @@ radial_segments = 30
 rings = 30
 material = SubResource("StandardMaterial3D_vasa2")
 
-[node name="Player" parent="." unique_id=1957169166 instance=ExtResource("2_h7iqs")]
-transform = Transform3D(-0.81604683, 0, -0.5779858, 0, 1, 0, 0.5779858, 0, -0.81604683, 44.101517, 0.9999999, -43.23225)
-
 [node name="MobSpawner" parent="." unique_id=47042793 instance=ExtResource("5_dxrkv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.16591, 0, 51.832695)
 
 [node name="MobSpawner2" parent="." unique_id=40451629 instance=ExtResource("5_dxrkv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.36883, 0, 48.574356)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1136086001]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1859779524]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=336096464]
+libraries/ = SubResource("AnimationLibrary_dakft")
+
+[node name="Player" parent="." unique_id=1957169166 instance=ExtResource("2_h7iqs")]

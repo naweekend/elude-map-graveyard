@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://ctchjup542y4n" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="AudioStream" uid="uid://ijc5hqgl3t4l" path="res://sounds/footstep.mp3" id="2_rkbax"]
 [ext_resource type="PackedScene" uid="uid://bsudu5ai1r12g" path="res://player/cubehead.gltf" id="3_g1dw6"]
+[ext_resource type="Shader" uid="uid://luo48g4oyce3" path="res://game/portal.gdshader" id="4_qjkh3"]
+[ext_resource type="AudioStream" uid="uid://dub063ghid534" path="res://game/portal_sound.mp3" id="5_g6k8r"]
 
 [sub_resource type="Animation" id="Animation_rkbax"]
 length = 0.001
@@ -42,14 +44,82 @@ _data = {
 radius = 0.3725586
 height = 2.0827637
 
+[sub_resource type="Animation" id="Animation_yw30f"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_qjkh3"]
+resource_name = "player_coming_from_portal"
+length = 5.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -10, 0, 3, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g6k8r"]
+_data = {
+&"RESET": SubResource("Animation_yw30f"),
+&"player_coming_from_portal": SubResource("Animation_qjkh3")
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_boad6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3c04x"]
+render_priority = 0
+shader = ExtResource("4_qjkh3")
+shader_parameter/size = 0.5
+shader_parameter/size_inner = 0.2
+shader_parameter/noise = SubResource("ImageTexture_boad6")
+shader_parameter/portalFrameColor = Color(0, 0, 1, 1)
+shader_parameter/portalHighlightColor = Color(0, 1, 1, 1)
+shader_parameter/inner = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rgyib"]
+material = SubResource("ShaderMaterial_3c04x")
+
+[sub_resource type="Animation" id="Animation_3c04x"]
+length = 0.001
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Portal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_joh67"]
+resource_name = "portal_scale_up"
+length = 0.2
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Portal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, 1, 1, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjkh3"]
+_data = {
+&"RESET": SubResource("Animation_3c04x"),
+&"portal_scale_up": SubResource("Animation_joh67")
+}
+
 [node name="Player" type="CharacterBody3D" unique_id=1957169166]
 script = ExtResource("1_oul6g")
 
-[node name="Mesh" parent="." unique_id=567775294 instance=ExtResource("3_g1dw6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3415625)
+[node name="Mesh" parent="." unique_id=2108652733 instance=ExtResource("3_g1dw6")]
 
 [node name="Head" type="Node3D" parent="." unique_id=708081614]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8135343, 0.33664906)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8135343, -0.43323624)
 
 [node name="CameraPivot" type="Node3D" parent="Head" unique_id=360196861]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
@@ -58,18 +128,38 @@ transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.006712079)
 
 [node name="Footstep" type="AudioStreamPlayer3D" parent="." unique_id=344161664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.33432937)
 stream = ExtResource("2_rkbax")
 bus = &"walking"
 
 [node name="SprintTimer" type="Timer" parent="." unique_id=525899456]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1515806131]
+[node name="CameraAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1515806131]
 libraries/ = SubResource("AnimationLibrary_yw30f")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=418854531]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0455322, 0.33278507)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0455322, -0.0015442967)
 shape = SubResource("CapsuleShape3D_g1dw6")
 
+[node name="PlayerAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1213561033]
+libraries/ = SubResource("AnimationLibrary_g6k8r")
+
+[node name="Portal" type="MeshInstance3D" parent="." unique_id=1970275475]
+transform = Transform3D(1, 0, 0, 0, 1, -5.9604645e-08, 0, 5.9604645e-08, 1, 0, 0.061459303, 0)
+mesh = SubResource("PlaneMesh_rgyib")
+
+[node name="PortalSound" type="AudioStreamPlayer3D" parent="." unique_id=1551457514]
+stream = ExtResource("5_g6k8r")
+bus = &"portal"
+
+[node name="PortalAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1445429806]
+libraries/ = SubResource("AnimationLibrary_qjkh3")
+
+[node name="PortalTimer" type="Timer" parent="." unique_id=272617125]
+wait_time = 3.0
+autostart = true
+
 [connection signal="timeout" from="SprintTimer" to="." method="_on_sprint_timer_timeout"]
+[connection signal="timeout" from="PortalTimer" to="." method="_on_portal_timer_timeout"]
 
 [editable path="Mesh"]

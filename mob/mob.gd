@@ -15,6 +15,7 @@ const AYAN_MOB: MobData = preload("uid://brobkrnjqm5sp")
 const GIGACHAD_MOB = preload("uid://c3jo2jfss5ym4")
 var mobs: Array[MobData] = [AYAN_MOB, GIGACHAD_MOB]
 var offset_mob: bool = false
+var is_touching_player := false
 
 func _ready() -> void:
 	# assign the mob data to nodes
@@ -96,14 +97,20 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 	
-	# player damage logic
+	# damage player
+	if is_touching_player:
+			var dmg = randi_range(5, 20)
+			player.take_damage(dmg * delta)
+
 
 func _on_audio_timer_timeout() -> void:
 	$Audio.play()
 	
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	# damage player
 	if body.name == "Player" and body is CharacterBody3D:
-		var dmg = randi_range(20, 50)
-		body.take_damage(dmg)
+		is_touching_player = true
+	
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body.name == "Player" and body is CharacterBody3D:
+		is_touching_player = false

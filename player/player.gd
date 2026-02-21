@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @export_group("Movement")
 @export var BASE_SPEED: float = 10
-@export var SPRINT_SPEED: float = 24.0
+@export var SPRINT_SPEED: float = 14
 @export var JUMP_VELOCITY: float = 4.5
 @export var MOUSE_SENSITIVITY: float = 0.002
 
@@ -17,23 +17,34 @@ var camera_x_rotation := 0.0
 @onready var camera = $Head/CameraPivot/Camera3D
 @onready var footstep: AudioStreamPlayer3D = $Footstep
 @onready var sprint_timer: Timer = $SprintTimer # Make sure this node exists!
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var mesh_animation_player: AnimationPlayer = $Mesh/AnimationPlayer
 @onready var camera_pivot: Node3D = $Head/CameraPivot
 @onready var head: Node3D = $Head
+@onready var portal: MeshInstance3D = $Portal
+@onready var portal_sound: AudioStreamPlayer3D = $PortalSound
+@onready var portal_anim: AnimationPlayer = $PortalAnim
+@onready var camera_animation_player: AnimationPlayer = $CameraAnimationPlayer
+@onready var player_animation_player: AnimationPlayer = $PlayerAnimationPlayer
+@onready var mesh_animation_player: AnimationPlayer = $Mesh/AnimationPlayer
+@onready var portal_animation_player: AnimationPlayer = $PortalAnimationPlayer
+@onready var player_spawn: Marker3D = $"../Map/PlayerSpawn"
+@onready var portal_timer: Timer = $PortalTimer
 
 var camera_animation_playing := false
 var health := 100
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	self.position = player_spawn.position
 	# Configure the timer via code just in case
 	sprint_timer.wait_time = 1.0
 	sprint_timer.one_shot = true 
 	# animate the camera
-	animation_player.play("camera_spawn")
 	camera_animation_playing = true
-	await animation_player.animation_finished
+	portal_animation_player.play("portal_scale_up")
+	portal_sound.play()
+	player_animation_player.play("player_coming_from_portal")
+	camera_animation_player.play("camera_spawn")
+	await camera_animation_player.animation_finished
 	camera_animation_playing = false
 
 func _unhandled_input(event):
@@ -123,3 +134,9 @@ func _on_sprint_timer_timeout() -> void:
 func take_damage(damage):
 	health -= damage
 	print(health)
+
+func _on_portal_timer_timeout() -> void:
+	portal_animation_player.play_backwards("portal_scale_up")
+	await portal_animation_player.animation_finished
+	portal_sound.stop()
+	portal.visible = false

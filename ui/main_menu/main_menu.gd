@@ -9,6 +9,7 @@ extends Node3D
 @onready var player_mesh: Node3D = $PlayerMesh
 @onready var player_fall_timer: Timer = $PlayerFallTimer
 @onready var play_button: Button = $CanvasLayer/VBoxContainer/PlayButton
+@onready var portal_animation_player: AnimationPlayer = $PortalAnimationPlayer
 
 
 var fog_colors = [

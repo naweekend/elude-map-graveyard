@@ -2278,3 +2278,6 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1, 0, -25)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=109857008]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 75)
 shape = SubResource("WorldBoundaryShape3D_k8tny")
+
+[node name="PlayerSpawn" type="Marker3D" parent="." unique_id=1156340641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, 0)

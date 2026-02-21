@@ -13,8 +13,10 @@ var fog_colors = [
 var game_modes = ["easy", "normal", "hard"]
 @onready var mob_spawner: Node3D = $MobSpawner
 @onready var mob_spawner_2: Node3D = $MobSpawner2
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var color_rect: ColorRect = $CanvasLayer/ColorRect
 
-func _ready() -> void:	
+func _ready() -> void:		
 	# get a random value
 	var density = randf_range(0.005, 0.01)
 	var colors = fog_colors.pick_random()
@@ -25,10 +27,15 @@ func _ready() -> void:
 	env.volumetric_fog_albedo = albedo
 	env.volumetric_fog_emission = emission
 	
+	# fade out the color rect
+	animation_player.play("color_rect_fadeout")
+	await animation_player.animation_finished
+	color_rect.color = Color(00000000)
+	
 	var game_mode = game_modes.pick_random()
 	print(game_mode)
 	if game_mode == "easy":
-		mob_spawner.mob_count = 1
+		mob_spawner.mob_count = 0
 		mob_spawner_2.mob_count = 1
 	elif game_mode == "normal":
 		mob_spawner.mob_count = 2
