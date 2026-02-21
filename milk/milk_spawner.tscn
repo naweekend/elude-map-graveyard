@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b8p0t1cjj20gq"]
+
+[ext_resource type="Script" uid="uid://b5bxf5juabupl" path="res://milk/milk_spawner.gd" id="1_ol4ci"]
+
+[node name="MilkSpawner" type="Node3D" unique_id=450784716]
+script = ExtResource("1_ol4ci")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1355779542]

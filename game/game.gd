@@ -18,14 +18,14 @@ var game_modes = ["easy", "normal", "hard"]
 
 func _ready() -> void:		
 	# get a random value
-	var density = randf_range(0.005, 0.01)
-	var colors = fog_colors.pick_random()
-	var albedo = Color(colors["albedo"])
-	var emission = Color(colors["emission"])
-	var env = world_environment.environment
-	env.volumetric_fog_density = density
-	env.volumetric_fog_albedo = albedo
-	env.volumetric_fog_emission = emission
+	#var density = randf_range(0.005, 0.01)
+	#var colors = fog_colors.pick_random()
+	#var albedo = Color(colors["albedo"])
+	#var emission = Color(colors["emission"])
+	#var env = world_environment.environment
+	#env.volumetric_fog_density = density
+	#env.volumetric_fog_albedo = albedo
+	#env.volumetric_fog_emission = emission
 	
 	# fade out the color rect
 	animation_player.play("color_rect_fadeout")
@@ -35,8 +35,8 @@ func _ready() -> void:
 	var game_mode = game_modes.pick_random()
 	print(game_mode)
 	if game_mode == "easy":
-		mob_spawner.mob_count = 1
-		mob_spawner_2.mob_count = 1
+		mob_spawner.mob_count = 0
+		mob_spawner_2.mob_count = 0
 	elif game_mode == "normal":
 		mob_spawner.mob_count = 2
 		mob_spawner.spawn_interval = 30

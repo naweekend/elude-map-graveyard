@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 		# FALLBACK: Move directly toward the player's X/Z 
 		# This allows the mob to "rub" against the wall so it can jump
 		next_pos = player.global_position
-
+	
 	# 4. Horizontal Movement
 	var horizontal_dist = Vector2(global_position.x, global_position.z).distance_to(Vector2(player.global_position.x, player.global_position.z))
 	
@@ -99,7 +99,7 @@ func _physics_process(delta: float) -> void:
 	
 	# damage player
 	if is_touching_player:
-			var dmg = randi_range(5, 20)
+			var dmg = randi_range(2, 10)
 			player.take_damage(dmg * delta)
 
 

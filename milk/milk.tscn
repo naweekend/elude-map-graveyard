@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dfjyjra0rg56w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gysq"]
+albedo_color = Color(1, 1, 0.49411765, 1)
+emission_enabled = true
+emission = Color(1, 1, 0.49411765, 1)
+emission_energy_multiplier = 13.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_3gysq"]
+material = SubResource("StandardMaterial3D_3gysq")
+size = Vector3(1, 200, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vh1en"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[node name="Milk" type="Area3D" unique_id=718374640]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1184408160]
+mesh = SubResource("BoxMesh_3gysq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=445497686]
+shape = SubResource("ConvexPolygonShape3D_vh1en")

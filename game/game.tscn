@@ -3,21 +3,47 @@
 [ext_resource type="Script" uid="uid://3vmx8otd8isu" path="res://game/game.gd" id="1_4fuuu"]
 [ext_resource type="PackedScene" uid="uid://36vl5nsjpre6" path="res://map/map.tscn" id="1_vasa2"]
 [ext_resource type="PackedScene" uid="uid://boohq3w3q0ve4" path="res://player/player.tscn" id="2_h7iqs"]
+[ext_resource type="Shader" uid="uid://dj47s4kf1a6wh" path="res://game/sky.gdshader" id="2_y36n6"]
+[ext_resource type="Script" uid="uid://7a08c6f6raa4" path="res://game/sun.gd" id="3_l8g03"]
 [ext_resource type="PackedScene" uid="uid://c0d0xxm3ocubu" path="res://mob/spawner/mob_spawner.tscn" id="5_dxrkv"]
 [ext_resource type="Texture2D" uid="uid://bibofd14ygrjt" path="res://ui/hud/over-hpbar.png" id="6_l8g03"]
 [ext_resource type="Texture2D" uid="uid://c2h8uliembmg8" path="res://ui/hud/progress-hpbar.png" id="7_j8tme"]
 [ext_resource type="FontFile" uid="uid://dxoaxc7oq1wh5" path="res://ui/fonts/Zerove-Regular.ttf" id="7_y36n6"]
+[ext_resource type="PackedScene" uid="uid://b8p0t1cjj20gq" path="res://milk/milk_spawner.tscn" id="10_j8tme"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h7iqs"]
-sky_top_color = Color(0.09425146, 0.23495525, 0.5513053, 1)
-sky_horizon_color = Color(0.11939063, 0.16463956, 0.6066454, 1)
-sky_energy_multiplier = 2.0
-ground_bottom_color = Color(0.09411765, 0.23529412, 0.5529412, 1)
-ground_horizon_color = Color(0.09411765, 0.23529412, 0.5529412, 1)
-energy_multiplier = 0.5
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l8g03"]
+shader = ExtResource("2_y36n6")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(10, 8, 1, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.2
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
 
 [sub_resource type="Sky" id="Sky_dxrkv"]
-sky_material = SubResource("ProceduralSkyMaterial_h7iqs")
+sky_material = SubResource("ShaderMaterial_l8g03")
 
 [sub_resource type="Environment" id="Environment_dxrkv"]
 background_mode = 2
@@ -28,15 +54,6 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.005
 volumetric_fog_albedo = Color(0.17977303, 0.43528175, 0.7081512, 1)
 volumetric_fog_emission = Color(0.09143519, 0.4676298, 0.6335676, 1)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u5opy"]
-load_path = "res://.godot/imported/Moon_texture.jpg-39363b4c884ecb416531dd1fc7244398.s3tc.ctex"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vasa2"]
-albedo_texture = SubResource("CompressedTexture2D_u5opy")
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 1.16
 
 [sub_resource type="Animation" id="Animation_dakft"]
 length = 0.001
@@ -84,16 +101,9 @@ environment = SubResource("Environment_dxrkv")
 transform = Transform3D(-0.8660254, -0.22543879, 0.44629297, 0, 0.8925858, 0.45087752, -0.50000006, 0.39047137, -0.77300197, 0, 0, 0)
 light_energy = 0.795
 shadow_enabled = true
+script = ExtResource("3_l8g03")
 
 [node name="Map" parent="." unique_id=1136450681 instance=ExtResource("1_vasa2")]
-
-[node name="Moon" type="CSGSphere3D" parent="." unique_id=845439564]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 477.35477, 519.29395, -849.7786)
-visible = false
-radius = 100.0
-radial_segments = 30
-rings = 30
-material = SubResource("StandardMaterial3D_vasa2")
 
 [node name="MobSpawner" parent="." unique_id=47042793 instance=ExtResource("5_dxrkv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.28099, 28.518679, 18.186367)
@@ -152,5 +162,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.716938, 0, -4.4504566)
 [node name="RoundTimer" type="Timer" parent="." unique_id=1067876294]
 wait_time = 120.0
 autostart = true
+
+[node name="MilkSpawner" parent="." unique_id=450784716 instance=ExtResource("10_j8tme")]
 
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

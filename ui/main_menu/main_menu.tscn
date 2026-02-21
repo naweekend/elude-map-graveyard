@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cgrcceckavy3f" path="res://ui/main_menu/buttons/settings-hover.png" id="7_w2r0d"]
 [ext_resource type="Texture2D" uid="uid://d3o68jr8ysqqi" path="res://ui/main_menu/buttons/exit-hover.png" id="9_s4pem"]
 [ext_resource type="Texture2D" uid="uid://yuysxdqt82bj" path="res://ui/main_menu/elude-red.png" id="10_xio0d"]
+[ext_resource type="Shader" uid="uid://dj47s4kf1a6wh" path="res://game/sky.gdshader" id="13_tf5ef"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_i5wg5"]
 
@@ -72,16 +73,39 @@ _data = {
 &"portal_scale_up": SubResource("Animation_joh67")
 }
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3c04x"]
-sky_top_color = Color(0.09425146, 0.23495525, 0.5513053, 1)
-sky_horizon_color = Color(0.11939063, 0.16463956, 0.6066454, 1)
-sky_energy_multiplier = 2.0
-ground_bottom_color = Color(0.09411765, 0.23529412, 0.5529412, 1)
-ground_horizon_color = Color(0.09411765, 0.23529412, 0.5529412, 1)
-energy_multiplier = 0.5
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qao3l"]
+shader = ExtResource("13_tf5ef")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(10, 8, 1, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.2
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
 
 [sub_resource type="Sky" id="Sky_4fuuu"]
-sky_material = SubResource("ProceduralSkyMaterial_3c04x")
+sky_material = SubResource("ShaderMaterial_qao3l")
 
 [sub_resource type="Environment" id="Environment_joh67"]
 background_mode = 2

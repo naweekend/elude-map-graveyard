@@ -28,14 +28,14 @@ func _ready() -> void:
 	player_animation_player.play("idle")
 	portal.scale = Vector3(0, 0, 0)
 	# get a random value (world env)
-	var density = randf_range(0.005, 0.01)
-	var colors = fog_colors.pick_random()
-	var albedo = Color(colors["albedo"])
-	var emission = Color(colors["emission"])
-	var env = world_environment.environment
-	env.volumetric_fog_density = density
-	env.volumetric_fog_albedo = albedo
-	env.volumetric_fog_emission = emission
+	#var density = randf_range(0.005, 0.01)
+	#var colors = fog_colors.pick_random()
+	#var albedo = Color(colors["albedo"])
+	#var emission = Color(colors["emission"])
+	#var env = world_environment.environment
+	#env.volumetric_fog_density = density
+	#env.volumetric_fog_albedo = albedo
+	#env.volumetric_fog_emission = emission
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
