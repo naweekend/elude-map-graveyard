@@ -35,7 +35,7 @@ func _ready() -> void:
 	var game_mode = game_modes.pick_random()
 	print(game_mode)
 	if game_mode == "easy":
-		mob_spawner.mob_count = 0
+		mob_spawner.mob_count = 1
 		mob_spawner_2.mob_count = 1
 	elif game_mode == "normal":
 		mob_spawner.mob_count = 2

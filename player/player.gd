@@ -28,6 +28,7 @@ var camera_x_rotation := 0.0
 @onready var portal_animation_player: AnimationPlayer = $PortalAnimationPlayer
 @onready var player_spawn: Marker3D = $"../Map/PlayerSpawn"
 @onready var portal_timer: Timer = $PortalTimer
+@onready var hp_bar: TextureProgressBar = $"../CanvasLayer/HPBar"
 
 var camera_animation_playing := false
 var health := 100
@@ -114,6 +115,8 @@ func _physics_process(delta: float) -> void:
 	# death logic
 	if health <= 0:
 		queue_free()
+		
+	hp_bar.value = health
 	
 func headbob(time):
 	var pos = Vector3.ZERO
