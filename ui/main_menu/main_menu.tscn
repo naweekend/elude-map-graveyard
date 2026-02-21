@@ -130,7 +130,7 @@ script = ExtResource("1_omy8q")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1928350803]
 transform = Transform3D(1, 0, 0, 0, 0.90258527, 0.43051112, 0, -0.43051112, 0.90258527, 0, 0, 0)
-light_energy = 0.7
+light_energy = 0.0
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=827168759]
@@ -151,14 +151,14 @@ transform = Transform3D(1, 0, 0, 0, -0.976296, 0.21643972, 0, -0.21643972, -0.97
 
 [node name="PlayButton" type="TextureButton" parent="CanvasLayer" unique_id=421139194]
 anchors_preset = -1
-anchor_left = 0.84800005
-anchor_top = 0.31500003
-anchor_right = 0.989
-anchor_bottom = 0.39200002
-offset_left = -776.16016
-offset_top = 138.79996
-offset_right = -792.88
-offset_bottom = 157.63998
+anchor_left = 0.44400004
+anchor_top = 0.469
+anchor_right = 0.57600003
+anchor_bottom = 0.563
+offset_left = -0.4800415
+offset_top = -0.52001953
+offset_right = 0.079956055
+offset_bottom = -0.040039063
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
@@ -169,14 +169,14 @@ stretch_mode = 4
 
 [node name="SettingsButton" type="TextureButton" parent="CanvasLayer" unique_id=105011731]
 anchors_preset = -1
-anchor_left = 0.73600006
-anchor_top = 0.43400002
-anchor_right = 1.0
-anchor_bottom = 0.56200004
-offset_left = -602.1201
-offset_top = 146.27997
-offset_right = -783.24805
-offset_bottom = 88.55194
+anchor_left = 0.42200002
+anchor_top = 0.59400004
+anchor_right = 0.592
+anchor_bottom = 0.669
+offset_left = 0.75994873
+offset_top = 0.47998047
+offset_right = 0.11193848
+offset_bottom = -0.008056641
 mouse_default_cursor_shape = 2
 texture_normal = SubResource("CompressedTexture2D_w2r0d")
 texture_hover = SubResource("CompressedTexture2D_4e78x")
@@ -185,14 +185,14 @@ stretch_mode = 4
 
 [node name="ExitButton" type="TextureButton" parent="CanvasLayer" unique_id=1466663481]
 anchors_preset = -1
-anchor_left = 0.85600007
-anchor_top = 0.56
-anchor_right = 0.994
-anchor_bottom = 0.68200004
-offset_left = -737.52014
-offset_top = 115.20001
-offset_right = -860.88806
-offset_bottom = 44.51996
+anchor_left = 0.47200003
+anchor_top = 0.69200003
+anchor_right = 0.546
+anchor_bottom = 0.748
+offset_left = -0.24005127
+offset_top = -0.3600464
+offset_right = -0.7281494
+offset_bottom = 0.23999023
 mouse_default_cursor_shape = 2
 texture_normal = SubResource("CompressedTexture2D_s4pem")
 texture_hover = SubResource("CompressedTexture2D_xio0d")
@@ -201,14 +201,15 @@ stretch_mode = 4
 
 [node name="Logo" type="TextureRect" parent="CanvasLayer" unique_id=1752042016]
 anchors_preset = -1
-anchor_left = 0.333
-anchor_top = 0.028
+anchor_left = 0.34500003
+anchor_top = 0.155
 anchor_right = 0.697
-anchor_bottom = 0.264
-offset_left = 27.384033
-offset_top = 93.856
-offset_right = -33.23999
-offset_bottom = 93.92798
+anchor_bottom = 0.39100003
+offset_left = 0.34399414
+offset_top = -0.3039856
+offset_right = -37.23999
+offset_bottom = -0.23205566
+grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = ExtResource("10_xio0d")

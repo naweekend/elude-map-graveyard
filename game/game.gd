@@ -58,7 +58,8 @@ func _process(delta: float) -> void:
 	time_label.text = format_time(round_timer.time_left)
 
 func _on_round_timer_timeout() -> void:
-	print("You survived!")
+	# if the timer times out, means the player did not switch to win screen, means they didnt win so switch to lose screen
+	get_tree().change_scene_to_file("res://game/game.tscn")
 
 func format_time(time_in_seconds: float) -> String:
 	var minutes: int = int(time_in_seconds) / 60
