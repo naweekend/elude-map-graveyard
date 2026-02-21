@@ -175,12 +175,15 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_lgq1i")
 
 [node name="PineTrees1" type="MultiMeshInstance3D" parent="." unique_id=133982240]
+lod_bias = 0.001
 multimesh = SubResource("MultiMesh_kffv2")
 
 [node name="PineTrees2" type="MultiMeshInstance3D" parent="." unique_id=1272770702]
+lod_bias = 0.001
 multimesh = SubResource("MultiMesh_7lyie")
 
 [node name="PineTrees3" type="MultiMeshInstance3D" parent="." unique_id=1291468981]
+lod_bias = 0.001
 multimesh = SubResource("MultiMesh_5jdw0")
 
 [editable path="terrain"]

@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dobeoetctsxpa" path="res://ui/hud/heart.png" id="9_3vho3"]
 [ext_resource type="PackedScene" uid="uid://b8p0t1cjj20gq" path="res://milk/milk_spawner.tscn" id="10_j8tme"]
 [ext_resource type="Texture2D" uid="uid://ctlj1rar8wv1s" path="res://ui/main_menu/milk_icon.png" id="10_qf6n1"]
+[ext_resource type="Script" uid="uid://bogollror28xv" path="res://game/fps_label.gd" id="13_vsp63"]
+[ext_resource type="ArrayOccluder3D" uid="uid://c4klnvedrgbut" path="res://game/game.occ" id="14_b686c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l8g03"]
 shader = ExtResource("2_y36n6")
@@ -108,7 +110,7 @@ environment = SubResource("Environment_dxrkv")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1119620247]
 transform = Transform3D(-0.8660254, -0.22543879, 0.44629297, 0, 0.8925858, 0.45087752, -0.50000006, 0.39047137, -0.77300197, 0, 0, 0)
 light_energy = 0.795
-shadow_enabled = true
+light_bake_mode = 1
 script = ExtResource("3_l8g03")
 
 [node name="Map" parent="." unique_id=1136450681 instance=ExtResource("1_vasa2")]
@@ -293,6 +295,21 @@ theme_override_fonts/font = ExtResource("7_y36n6")
 text = "Find all the milk cartons and avoid dying before time runs out."
 autowrap_mode = 2
 
+[node name="FPSLabel" type="Label" parent="CanvasLayer" unique_id=313054672]
+visible = false
+anchors_preset = -1
+anchor_left = 0.003
+anchor_right = 0.058000002
+anchor_bottom = 0.034
+offset_left = 0.23999977
+offset_top = 1.0
+offset_right = -0.3600006
+offset_bottom = 0.27999878
+theme_override_fonts/font = ExtResource("7_y36n6")
+theme_override_font_sizes/font_size = 30
+text = "FPS: 0"
+script = ExtResource("13_vsp63")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=336096464]
 libraries/ = SubResource("AnimationLibrary_dakft")
 
@@ -305,5 +322,8 @@ one_shot = true
 autostart = true
 
 [node name="MilkSpawner" parent="." unique_id=450784716 instance=ExtResource("10_j8tme")]
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=1156472209]
+occluder = ExtResource("14_b686c")
 
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

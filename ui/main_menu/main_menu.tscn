@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bwyi2636g35wf" path="res://ui/main_menu/affinity/play.png" id="4_tf5ef"]
 [ext_resource type="AudioStream" uid="uid://dub063ghid534" path="res://game/portal_sound.mp3" id="5_3c04x"]
 [ext_resource type="Texture2D" uid="uid://btevyuor3jdce" path="res://ui/main_menu/affinity/play-hover.png" id="5_qao3l"]
+[ext_resource type="ArrayOccluder3D" uid="uid://bpg55hfw0fm52" path="res://ui/main_menu/main_menu.occ" id="10_4e78x"]
 [ext_resource type="Texture2D" uid="uid://yuysxdqt82bj" path="res://ui/main_menu/elude-red.png" id="10_xio0d"]
 [ext_resource type="Shader" uid="uid://dj47s4kf1a6wh" path="res://game/sky.gdshader" id="13_tf5ef"]
 
@@ -131,7 +132,6 @@ script = ExtResource("1_omy8q")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1928350803]
 transform = Transform3D(1, 0, 0, 0, 0.90258527, 0.43051112, 0, -0.43051112, 0.90258527, 0, 0, 0)
 light_energy = 0.0
-shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=827168759]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4465747, 16.025589)
@@ -264,6 +264,9 @@ wait_time = 1.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=355039057]
 environment = SubResource("Environment_joh67")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=1843140215]
+occluder = ExtResource("10_4e78x")
 
 [connection signal="pressed" from="CanvasLayer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ExitButton" to="." method="_on_exit_button_pressed"]
